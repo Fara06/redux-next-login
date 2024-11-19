@@ -13,9 +13,14 @@ const userSlice = createSlice({
     status: "loggedOut",
   },
   reducers: {
-    register: () => {
-      // Implement user registration logic here
+    register: (state, action) => {
+      const newUser = {
+        ...action.payload,
+        status: "Registered", // Status default saat registrasi
+      };
+      state.users.push(newUser); // Tambahkan user ke state
     },
+    
     login: (state, action) => {
       const user = state.users.find(
         (user: User) =>
@@ -27,9 +32,9 @@ const userSlice = createSlice({
         state.status = "loggedIn";
       }
     },
-    logout: () => {
-      // Implement user logout logic here
-    },
+    logout: (state) => {
+      state.userStatus = "loggedOut"; // Ubah status global ke loggedOut
+    },    
   },
 });
 
